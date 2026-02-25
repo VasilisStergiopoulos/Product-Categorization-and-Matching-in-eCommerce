@@ -87,6 +87,13 @@ Example:
 | iPhone 16 Pro Max 256GB            | Apple iPhone 16 Pro Max |
 | Apple iPhone 16 Pro Max 5G 8GB RAM | Apple iPhone 16 Pro Max |
 
+Challenges:
+
+* High textual variation
+* Missing attributes
+* Vendor inconsistencies
+* Annotation errors
+
 ---
 
 # 🧹 Data Cleaning & Preparation
@@ -201,65 +208,69 @@ Making it ideal for real-world deployment.
 
 ---
 
-# 🧠 Key Contributions
+# 📈 Conclusions
+This thesis presented a comprehensive two-phase framework combining Product Categorization and Product Matching to address the challenges of identifying identical products across e-Commerce datasets.
 
-This thesis introduces:
-
-### Two-Phase Deep Learning Framework
-
-Combining categorization and matching for improved accuracy
-
-### Hard-Mining Strategy
-
-Improves training data quality
-
-### Real-World Evaluation
-
-Tested on real e-commerce datasets
-
-### Model Comparison
-
-Evaluated:
-
-* Transformers
-* Siamese Networks
-* Sentence Embeddings
-* Large Language Models
-
-### Efficient Production-Ready Solution
-
-DistilBERT provides best performance-cost balance 
+The integration of these two tasks is essential for Product Comparison Platforms, as Product Categorization acts as an effective blocking condition. It organizes incoming product feeds into structured categories, significantly reducing the candidate space for matching and minimizing the workload for human annotators.
 
 ---
 
-# 📁 Repository Structure
+## Product Categorization
 
-```
-notebooks/
+BERT-based models achieved excellent performance in categorizing products in the PriceRunner Aggregate dataset.
 
-hard_mining.ipynb
-product_categorization.ipynb
-product_matching.ipynb
+This step:
 
-data/
+* Improves matching efficiency
+* Enables scalable catalog organization
+* Enhances real-world usability
 
-raw/
-processed/
+Among all evaluated models:
 
-images/
+* DistilBERT is recommended as the most efficient model
+* It achieved 98.85% F1-score while requiring only 7.8 minutes training time
 
-README.md
-```
+Although RoBERTa achieved the highest F1-score (99.21%), DistilBERT provides a significantly better balance between performance and efficiency.
+RoBERTa is recommended only when maximum accuracy is required and computational resources are not limited.
 
----
+## Product Matching
 
-# 🎯 Real-World Applications
+A wide range of models were evaluated:
 
-This system can be used in:
+* Transformer-based classifiers
+* Siamese LSTM networks
+* Sentence-BERT
+* Large Language Models (GPT-4 and GPT-4o)
 
-E-commerce platforms
-Price comparison websites
-Product recommendation systems
-Catalog management systems
+Results showed that:
 
----
+* RoBERTa, DeBERTa, and DistilBERT achieved the highest performance
+* These models performed effectively even on medium-sized datasets
+
+Fine-tuned Sentence-BERT achieved 90% F1-score. This makes it a strong lightweight alternative.
+Siamese LSTM networks provided a solid baseline but were outperformed by Transformer models.
+
+## Large Language Models
+
+GPT-4o demonstrated strong zero-shot performance:
+
+* F1 Score: 0.8687
+* Cost: $0.23 for 1210 product pairs
+
+This highlights their potential when labeled data is limited.
+
+## Overall Recommendation
+
+Considering both performance and efficiency, DistilBERT is the recommended model for the proposed framework.
+
+It provides:
+
+* High accuracy
+* Fast training
+* Low computational cost
+* Excellent scalability
+
+## Final Conclusion
+
+This thesis demonstrates that combining Product Categorization and Product Matching using efficient Transformer-based models provides a highly accurate, scalable, and cost-effective solution for real-world product identification.
+This framework enables automation of product catalog management and significantly reduces redundant comparisons.
