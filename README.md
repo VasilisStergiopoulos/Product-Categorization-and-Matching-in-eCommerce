@@ -21,23 +21,6 @@ This pipeline enables Product Comparison Platforms to maintain clean, structured
 
 ---
 
-# 🚀 Key Results
-
-| Task                   | Best Model | Accuracy | F1 Score |
-| ---------------------- | ---------- | -------- | -------- |
-| Product Categorization | DistilBERT | 99%      | 99%      |
-| Product Matching       | DistilBERT | 96%      | 95%      |
-
-DistilBERT achieved the best trade-off between:
-
-* Performance
-* Training time
-* Computational cost
-
-Making it ideal for real-world deployment.
-
----
-
 # 🏗️ Framework Architecture
 
 The system consists of two sequential phases:
@@ -178,42 +161,53 @@ Product A [SEP] Product B → Match / No Match
 
 ---
 
-# 🏆 Best Model: DistilBERT
+# 📊 Results
 
-DistilBERT achieved:
+🏆 Overall Performance
 
-* High accuracy
-* Fast training
-* Lower computational cost
+| Task                   | Best Model | Accuracy | F1 Score |
+| ---------------------- | ---------- | -------- | -------- |
+| Product Categorization | DistilBERT | 99%      | 99%      |
+| Product Matching       | DistilBERT | 96%      | 95%      |
 
-Making it ideal for real-world deployment. 
+DistilBERT achieved the best trade-off between:
 
----
+* Performance
+* Training time
+* Computational cost
 
-# 📊 Main Results
+Making it ideal for real-world deployment.
 
-## Total Training Time per Model and Maximum Length in Product Matching
-
+## Training Time Comparison
 <p align="center">
   <img src="results/Product Matching/total-training-time-per-model-and-max-len.png" width="700">
 </p>
 
----
+DistilBERT was the fastest model across all configurations.
+Even when increasing sequence length, it remained significantly more efficient than BERT, RoBERTa, and DeBERTa.
+This confirms its suitability for scalable production systems.
 
-## Comparative Analysis in Product Matching 
+## Model Performance Comparison 
 
 <p align="center">
   <img src="results/Product Matching/comparative-analysis.png" width="700">
 </p>
 
+Transformer-based models achieved the highest performance.
+
+Key observations:
+
+* DeBERTa achieved the highest F1 score (0.9579)
+* RoBERTa achieved similar performance (0.9571)
+* DistilBERT achieved nearly identical performance (0.9546) while being significantly faster
+
+Sentence-BERT achieved strong performance after fine-tuning (0.9050), while GPT-4o demonstrated competitive zero-shot performance (0.8687) without training.
+
 ---
 
 # 📈 Conclusions
 This thesis presented a comprehensive two-phase framework combining Product Categorization and Product Matching to address the challenges of identifying identical products across e-Commerce datasets.
-
 The integration of these two tasks is essential for Product Comparison Platforms, as Product Categorization acts as an effective blocking condition. It organizes incoming product feeds into structured categories, significantly reducing the candidate space for matching and minimizing the workload for human annotators.
-
----
 
 ## Product Categorization
 
@@ -274,3 +268,51 @@ It provides:
 
 This thesis demonstrates that combining Product Categorization and Product Matching using efficient Transformer-based models provides a highly accurate, scalable, and cost-effective solution for real-world product identification.
 This framework enables automation of product catalog management and significantly reduces redundant comparisons.
+
+---
+
+# 🔬 Future Work
+
+Several promising directions can further improve this framework:
+
+## Advanced Hard-Negative Mining
+
+Advanced techniques such as SMOCC (Semantic Matching using One-Class Classification) can generate more challenging training examples without explicit mining.
+This can significantly improve model robustness.
+
+## Data Augmentation
+
+Future work can explore data augmentation techniques such as:
+
+* Attribute masking
+* Attribute swapping
+* Paraphrasing
+
+These techniques can increase dataset size and improve model generalization.
+
+## Cross-Validation
+
+Implementing k-fold cross-validation would:
+
+* Improve evaluation reliability
+* Reduce sensitivity to dataset splits
+* Increase robustness
+
+## Denoising Autoencoders
+
+Denoising autoencoders could learn improved product representations by reconstructing corrupted product titles.
+This may help models capture deeper semantic patterns.
+
+## Few-Shot Prompting for GPT Models
+
+Few-shot prompting could significantly improve GPT-based matching performance by providing example product pairs.
+This approach may enhance performance without requiring full fine-tuning.
+
+## Product Clustering
+
+As a post-processing step, clustering matched product pairs could:
+
+* Automatically construct unified product entities
+* Improve catalog organization
+* Reduce redundancy
+* Enhance user navigation
